@@ -6,19 +6,14 @@
 //
 
 import UIKit
-import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var circularView: HalfCircularProgressView!
-    var locationManager: CLLocationManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
