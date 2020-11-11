@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		9D7DF889EE2D29581BE0A1AF /* Pods_RadiON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD6DEE1CD6554A3267F9E2F5 /* Pods_RadiON.framework */; };
+		C42469B0255BD241009592DF /* HalfCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42469AF255BD241009592DF /* HalfCircularProgressView.swift */; };
 		C47FB991255B0B8B00BE4F2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FB990255B0B8B00BE4F2E /* AppDelegate.swift */; };
 		C47FB993255B0B8B00BE4F2E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FB992255B0B8B00BE4F2E /* SceneDelegate.swift */; };
 		C47FB995255B0B8B00BE4F2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FB994255B0B8B00BE4F2E /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 		39617C9F8D64E8C466ACBCBF /* Pods-RadiON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiON.debug.xcconfig"; path = "Target Support Files/Pods-RadiON/Pods-RadiON.debug.xcconfig"; sourceTree = "<group>"; };
 		BD6DEE1CD6554A3267F9E2F5 /* Pods_RadiON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EE314E18F7C44B6DF4DDD6 /* Pods-RadiON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiON.release.xcconfig"; path = "Target Support Files/Pods-RadiON/Pods-RadiON.release.xcconfig"; sourceTree = "<group>"; };
+		C42469AF255BD241009592DF /* HalfCircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCircularProgressView.swift; sourceTree = "<group>"; };
 		C47FB98D255B0B8B00BE4F2E /* RadiON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47FB990255B0B8B00BE4F2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C47FB992255B0B8B00BE4F2E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,8 +58,15 @@
 				39617C9F8D64E8C466ACBCBF /* Pods-RadiON.debug.xcconfig */,
 				C1EE314E18F7C44B6DF4DDD6 /* Pods-RadiON.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C42469AD255BD1F2009592DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C42469AF255BD241009592DF /* HalfCircularProgressView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		C47FB984255B0B8A00BE4F2E = {
@@ -81,6 +90,7 @@
 		C47FB98F255B0B8B00BE4F2E /* RadiON */ = {
 			isa = PBXGroup;
 			children = (
+				C42469AD255BD1F2009592DF /* Views */,
 				C47FB990255B0B8B00BE4F2E /* AppDelegate.swift */,
 				C47FB992255B0B8B00BE4F2E /* SceneDelegate.swift */,
 				C47FB994255B0B8B00BE4F2E /* ViewController.swift */,
@@ -207,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C47FB995255B0B8B00BE4F2E /* ViewController.swift in Sources */,
+				C42469B0255BD241009592DF /* HalfCircularProgressView.swift in Sources */,
 				C47FB991255B0B8B00BE4F2E /* AppDelegate.swift in Sources */,
 				C47FB993255B0B8B00BE4F2E /* SceneDelegate.swift in Sources */,
 			);
