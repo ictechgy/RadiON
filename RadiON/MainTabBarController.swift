@@ -35,6 +35,7 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
         switch locationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.requestLocation()
+            
         case .denied, .restricted:
             showAlert()
         case .notDetermined:
