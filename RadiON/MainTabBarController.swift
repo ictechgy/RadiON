@@ -35,7 +35,7 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
         switch locationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.requestLocation()
-            
+            Location.shared.state = .loading
         case .denied, .restricted:
             showAlert()
         case .notDetermined:
@@ -70,9 +70,15 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
         requestLocationPermission()
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //request location 성공 시 호출
+        Location.shared.coordinate = locations[locations.endIndex-1].coordinate
+        Location.shared.state = .loaded
+    }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         //location value 못얻을 시
-        
+        Location.shared.state = .error
     }
 
     /*
