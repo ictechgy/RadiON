@@ -9,6 +9,7 @@ import UIKit
 import CoreLocation
 
 let locationAuthStatus: String = "LocationAuthStatus"
+let ReceivedLocationInfo: String = "ReceivedLocationInfo"
 
 class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
     
@@ -45,8 +46,7 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
         }
         
         //이제 여기서 Notification Center를 통해 status를 각 뷰컨트롤러로 전파
-        let notiCenter: NotificationCenter = NotificationCenter.default
-        notiCenter.post(name: NSNotification.Name(locationAuthStatus), object: locationManager.authorizationStatus)
+        NotificationCenter.default.post(name: NSNotification.Name(locationAuthStatus), object: locationManager.authorizationStatus)
         //넘기는 오브젝트 타입: CLAuthorizationStatus
     }
     
@@ -72,13 +72,15 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //request location 성공 시 호출
-        Location.shared.coordinate = locations[locations.endIndex-1].coordinate
+        Location.shared.coordinate = locations[locations.endIndex-1].coordinate //맨 뒤의 값이 가장 최신 값
         Location.shared.state = .loaded
+        NotificationCenter.default.post(name: Notification.Name(ReceivedLocationInfo), object: nil)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         //location value 못얻을 시
         Location.shared.state = .error
+        NotificationCenter.default.post(name: Notification.Name(ReceivedLocationInfo), object: nil)
     }
 
     /*

@@ -8,7 +8,12 @@
 import Foundation
 import CoreLocation
 
-let centerOfSeoul: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.33, longitude: 26.59)
+let centerOfSeoul: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.528582, longitude: 126.981987)  //용산 좌표
+let farNorth: Double = 38.45
+let farSouth: Double = 33.1
+let farEast: Double = 131.872
+let farWest: Double = 125.06
+//대한민국의 각 끝점 좌표
 
 //user location 정보를 저장하고 있는 싱글톤 객체
 class Location{
@@ -25,7 +30,9 @@ class Location{
             return _latitude
         }
         set {
-            _latitude = newValue
+            if newValue >= farSouth && newValue <= farNorth {
+                _latitude = newValue
+            }
         }
     }
     
@@ -34,7 +41,9 @@ class Location{
             return _longitude
         }
         set {
-            _longitude = newValue
+            if newValue >= farWest && newValue <= farEast {
+                _longitude = newValue
+            }
         }
     }
     
@@ -43,8 +52,8 @@ class Location{
             return CLLocationCoordinate2D(latitude: self._latitude, longitude: self._longitude)
         }
         set {
-            self._latitude = newValue.latitude
-            self._longitude = newValue.longitude
+            latitude = newValue.latitude
+            longitude = newValue.longitude
         }
     }
     
