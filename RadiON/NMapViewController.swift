@@ -80,6 +80,7 @@ class NMapViewController: UIViewController, NMFAuthManagerDelegate {
         if Location.shared.state == .loaded {
             let locationOverlay = naverMapView.mapView.locationOverlay
             locationOverlay.location = NMGLatLng(from: Location.shared.coordinate)
+            locationOverlay.hidden = false  //설정 후 보여주기. (현재 내 위치 버튼 안눌러도 기본적으로 보이도록)
         }
     }
     
