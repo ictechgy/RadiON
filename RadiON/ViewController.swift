@@ -41,6 +41,7 @@ class ViewController: UIViewController {
         
         guard let status: CLAuthorizationStatus = noti.object as? CLAuthorizationStatus else {
             levelLabel.text = locError
+            levelLabel.setNeedsDisplay()
             return
         }
         
@@ -50,12 +51,13 @@ class ViewController: UIViewController {
         default:    //거부되거나 아직 정해지지 않은 경우에는 ?만 띄웁니다.
             levelLabel.text = locError
         }
-        
+        levelLabel.setNeedsDisplay()
     }
     
     @objc func didReceiveLocationInfo() {
         if Location.shared.state != .error {
             levelLabel.text = locError
+            levelLabel.setNeedsDisplay()
             return
         }
         

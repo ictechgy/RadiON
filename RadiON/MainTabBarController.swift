@@ -25,6 +25,7 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
         locationManager.delegate = self
     }
     
+    //순서 상 TabBarController viewDidLoad -> ViewController viewDidLoad -> ViewController viewWillAppear -> TabBarController viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

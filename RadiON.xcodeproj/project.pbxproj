@@ -17,6 +17,7 @@
 		C47FB998255B0B8B00BE4F2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C47FB996255B0B8B00BE4F2E /* Main.storyboard */; };
 		C47FB99A255B0B8B00BE4F2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C47FB999255B0B8B00BE4F2E /* Assets.xcassets */; };
 		C47FB99D255B0B8B00BE4F2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C47FB99B255B0B8B00BE4F2E /* LaunchScreen.storyboard */; };
+		C497FA4C2562CCDC00E2DEFA /* NMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497FA4B2562CCDC00E2DEFA /* NMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		C47FB999255B0B8B00BE4F2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C47FB99C255B0B8B00BE4F2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C47FB99E255B0B8B00BE4F2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C497FA4B2562CCDC00E2DEFA /* NMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				C47FB99B255B0B8B00BE4F2E /* LaunchScreen.storyboard */,
 				C47FB99E255B0B8B00BE4F2E /* Info.plist */,
 				C42469B4255C40AC009592DF /* MainTabBarController.swift */,
+				C497FA4B2562CCDC00E2DEFA /* NMapViewController.swift */,
 			);
 			path = RadiON;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				C47FB991255B0B8B00BE4F2E /* AppDelegate.swift in Sources */,
 				C4623811255EEE1F00023F35 /* Location.swift in Sources */,
 				C47FB993255B0B8B00BE4F2E /* SceneDelegate.swift in Sources */,
+				C497FA4C2562CCDC00E2DEFA /* NMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
