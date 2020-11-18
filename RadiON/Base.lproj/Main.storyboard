@@ -16,37 +16,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fgs-zR-3sw" customClass="HalfCircularProgressView" customModule="RadiON" customModuleProvider="target">
-                                <rect key="frame" x="80" y="194" width="254" height="219"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fgs-zR-3sw" customClass="HalfCircularProgressView" customModule="RadiON" customModuleProvider="target">
+                                <rect key="frame" x="80" y="194" width="253" height="219"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcE-eg-Knd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcE-eg-Knd">
                                         <rect key="frame" x="16" y="80" width="222" height="59"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="EcE-eg-Knd" secondAttribute="trailing" constant="16" id="4EP-IW-pGZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="EcE-eg-Knd" secondAttribute="bottom" constant="80" id="4PE-Bs-lxA"/>
-                                    <constraint firstItem="EcE-eg-Knd" firstAttribute="top" secondItem="Fgs-zR-3sw" secondAttribute="top" constant="80" id="Ifi-mc-ysa"/>
-                                    <constraint firstItem="EcE-eg-Knd" firstAttribute="leading" secondItem="Fgs-zR-3sw" secondAttribute="leading" constant="16" id="Ohs-mM-m6R"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Fgs-zR-3sw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5YN-4E-oGg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Fgs-zR-3sw" secondAttribute="trailing" constant="80" id="COQ-MD-9sU"/>
-                            <constraint firstItem="Fgs-zR-3sw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="Lyc-hl-VWB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Fgs-zR-3sw" secondAttribute="bottom" constant="400" id="Qvj-52-WgD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Fgs-zR-3sw" secondAttribute="trailing" constant="80" id="aXo-i7-9SE"/>
-                            <constraint firstItem="Fgs-zR-3sw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="e11-CK-KKS"/>
-                            <constraint firstItem="Fgs-zR-3sw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="eXQ-gy-11t"/>
-                            <constraint firstItem="Fgs-zR-3sw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="hJV-pD-DzW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="Fgs-zR-3sw" secondAttribute="bottom" constant="500" id="u1P-vP-yH9"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="홈" image="house" catalog="system" selectedImage="house.fill" id="xdG-CF-9Dy"/>
                     <connections>
@@ -65,20 +50,10 @@
                     <view key="view" contentMode="scaleToFill" id="rTi-YB-0C1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lDS-iZ-C7h">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="WRp-Md-bmU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="지도" image="map" catalog="system" selectedImage="map.fill" id="LGZ-Qf-dCw"/>
-                    <connections>
-                        <outlet property="mapContainerView" destination="lDS-iZ-C7h" id="1Ka-Lf-UMh"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nsA-hL-Zxr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

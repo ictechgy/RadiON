@@ -14,7 +14,6 @@ class NMapViewController: UIViewController, NMFAuthManagerDelegate {
     let errorTitle: String = "에러 발생"
     let errorMsg: String = "지도 정보를 가져오던 도중 문제가 발생했습니다. 나중에 다시 시도하십시오."
     
-    @IBOutlet weak var mapContainerView: UIView!
     var naverMapView: NMFNaverMapView!
     var mapView: NMFMapView!
     
@@ -25,8 +24,8 @@ class NMapViewController: UIViewController, NMFAuthManagerDelegate {
         NMFAuthManager.shared().delegate = self
 
         // Do any additional setup after loading the view.
-        naverMapView = NMFNaverMapView(frame: mapContainerView.frame)
-        mapContainerView.addSubview(naverMapView)
+        naverMapView = NMFNaverMapView(frame: view.frame)
+        view.addSubview(naverMapView)
 
         mapView = naverMapView.mapView
         
