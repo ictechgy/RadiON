@@ -8,13 +8,16 @@
 import UIKit
 import CoreData
 
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var circularView: HalfCircularProgressView!
     @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var userAddress: UILabel!
     
     let locError: String = "?"
     let locLoading: String = "loading"
+    let locNotAuthorizedMsg: String = "위치정보를 불러올 수 없음"
 
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -42,6 +45,7 @@ class ViewController: UIViewController {
         guard let status: CLAuthorizationStatus = noti.object as? CLAuthorizationStatus else {
             levelLabel.text = locError
             levelLabel.setNeedsDisplay()
+            userAddress.text = locNotAuthorizedMsg
             return
         }
         
@@ -50,17 +54,19 @@ class ViewController: UIViewController {
             levelLabel.text = locLoading
         default:    //거부되거나 아직 정해지지 않은 경우에는 ?만 띄웁니다.
             levelLabel.text = locError
+            userAddress.text = locNotAuthorizedMsg
         }
         levelLabel.setNeedsDisplay()
     }
     
     @objc func didReceiveLocationInfo() {
-        if Location.shared.state != .error {
+        if Location.shared.state != .loaded {
             levelLabel.text = locError
             levelLabel.setNeedsDisplay()
+            userAddress.text = locNotAuthorizedMsg
             return
         }
-        
+        userAddress.text?.append(Location.shared.userAddress ?? "알 수 없음")
     }
     
 }

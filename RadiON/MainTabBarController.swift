@@ -73,9 +73,22 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //request location 성공 시 호출
-        Location.shared.coordinate = locations[locations.endIndex-1].coordinate //맨 뒤의 값이 가장 최신 값
+        let userLocation = locations[locations.endIndex-1] //맨 뒤의 값이 가장 최신 값
+        let geoCoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        geoCoder.reverseGeocodeLocation(userLocation, preferredLocale: locale) { (placeMarks, _) in
+            if let address: CLPlacemark = placeMarks?[0] {
+                Location.shared.administrativeArea = address.administrativeArea
+                Location.shared.locality = address.locality
+                Location.shared.thoroughfare = address.thoroughfare
+                //접속 위치 시 구 동 설정
+                
+                NotificationCenter.default.post(name: Notification.Name(ReceivedLocationInfo), object: nil)
+                //접속 위치도 띄워주기 위해 NotificationCenter post를 콜백에서 부릅니다.(조금 뒤로 미룸)
+            }
+        }
+        Location.shared.coordinate = userLocation.coordinate
         Location.shared.state = .loaded
-        NotificationCenter.default.post(name: Notification.Name(ReceivedLocationInfo), object: nil)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

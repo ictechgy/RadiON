@@ -16,27 +16,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fgs-zR-3sw" customClass="HalfCircularProgressView" customModule="RadiON" customModuleProvider="target">
-                                <rect key="frame" x="80" y="194" width="253" height="219"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fgs-zR-3sw" customClass="HalfCircularProgressView" customModule="RadiON" customModuleProvider="target">
+                                <rect key="frame" x="80" y="194" width="254" height="219"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcE-eg-Knd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcE-eg-Knd">
                                         <rect key="frame" x="16" y="80" width="222" height="59"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="접속 위치: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vb0-Sm-Itz">
+                                        <rect key="frame" x="16" y="190" width="230" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="254" id="3xV-1U-M0j"/>
+                                    <constraint firstItem="EcE-eg-Knd" firstAttribute="leading" secondItem="vb0-Sm-Itz" secondAttribute="leading" id="44D-Af-E0H"/>
+                                    <constraint firstItem="vb0-Sm-Itz" firstAttribute="bottom" secondItem="Fgs-zR-3sw" secondAttribute="bottomMargin" id="4UL-l8-t3l"/>
+                                    <constraint firstItem="EcE-eg-Knd" firstAttribute="centerY" secondItem="Fgs-zR-3sw" secondAttribute="centerY" id="A3t-3y-ffF"/>
+                                    <constraint firstItem="vb0-Sm-Itz" firstAttribute="trailing" secondItem="Fgs-zR-3sw" secondAttribute="trailingMargin" id="DPP-0S-kdH"/>
+                                    <constraint firstItem="EcE-eg-Knd" firstAttribute="centerX" secondItem="Fgs-zR-3sw" secondAttribute="centerX" id="Rnp-Vr-azm"/>
+                                    <constraint firstItem="EcE-eg-Knd" firstAttribute="leading" secondItem="Fgs-zR-3sw" secondAttribute="leading" constant="16" id="UGo-hN-qx9"/>
+                                    <constraint firstItem="EcE-eg-Knd" firstAttribute="top" secondItem="Fgs-zR-3sw" secondAttribute="top" constant="80" id="gV6-87-Mpb"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Fgs-zR-3sw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="A2a-OZ-06T"/>
+                            <constraint firstItem="Fgs-zR-3sw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YjD-BH-fEO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Fgs-zR-3sw" secondAttribute="bottom" constant="400" id="jR8-z1-ttZ"/>
+                            <constraint firstItem="Fgs-zR-3sw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="zc3-8o-mBA"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="홈" image="house" catalog="system" selectedImage="house.fill" id="xdG-CF-9Dy"/>
                     <connections>
                         <outlet property="circularView" destination="Fgs-zR-3sw" id="MQN-79-O6p"/>
                         <outlet property="levelLabel" destination="EcE-eg-Knd" id="hpZ-7E-1OS"/>
+                        <outlet property="userAddress" destination="vb0-Sm-Itz" id="OOv-zw-OzH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

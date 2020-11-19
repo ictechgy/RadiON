@@ -24,6 +24,16 @@ class Location{
     private var _latitude: CLLocationDegrees = centerOfSeoul.latitude
     private var _longitude: CLLocationDegrees = centerOfSeoul.longitude
     //default value 설정
+    
+    var administrativeArea: String? //시
+    var locality: String?   //구
+    var thoroughfare: String?   //동
+    var userAddress: String?{
+        if let administrativeArea = administrativeArea, let locality = locality{
+            return administrativeArea + " " + locality
+        }
+        return nil
+    }
      
     var latitude: CLLocationDegrees {
         get {
