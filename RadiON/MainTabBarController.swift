@@ -29,10 +29,28 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        requestCSVDataFromServer()
         requestLocationPermission()
     }
     
     //MARK: - Custom Methods
+    func requestCSVDataFromServer() {
+        //서버와 통신해서 csv파일 가져오기.
+        //탭 컨트롤러가 보일 때 갱신. 이후에는 별도의 새로고침 버튼으로 데이터 동기화
+        //viewWillAppear에 갱신 메소드를 두었으므로 dissapear뒤에 appear하는 방식으로 무한 호출이 될 경우
+        //불필요한 트래픽을 주게 되므로 갱신 시점 time값 가지고 있기.(새로고침도 해당 time값으로 갱신 허/불허 설정)
+        //오래된 데이터를 가지고 있는 경우 화면이 보일 때 time값과 현재 시각 비교 후 자동갱신 해주고 그 외에는 수동갱신으로 설정
+        
+        let urlString: String = "https://iernet.kins.re.kr/all_site.asp"
+        guard let url: URL = URL(string: urlString) else{
+            //some error message
+            return
+        }
+        
+        let urlSession: URLSession = URLSession.shared
+        let urlSessionTask: URLSessionTask = urlSession.dataTask(with: url, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
+    }
+    
     func requestLocationPermission() {
         switch locationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
@@ -82,10 +100,12 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
                 Location.shared.locality = address.locality
                 Location.shared.thoroughfare = address.thoroughfare
                 //접속 위치 시 구 동 설정
-                
-                NotificationCenter.default.post(name: Notification.Name(ReceivedLocationInfo), object: nil)
-                //접속 위치도 띄워주기 위해 NotificationCenter post를 콜백에서 부릅니다.(조금 뒤로 미룸)
             }
+            NotificationCenter.default.post(name: Notification.Name(ReceivedLocationInfo), object: nil)
+            //접속 위치도 띄워주기 위해 NotificationCenter post를 콜백에서 부릅니다.(조금 뒤로 미룸)
+            //변환 과정에서 에러가 발생했어도 일단 알림은 전달돠도록 밖으로 빼냄.
+            //(에러 발생 시 placeMarks == nil 상태)
+            //변환에의 에러가 생겼다면 화면에는 알 수 없음이 뜰 것.
         }
         Location.shared.coordinate = userLocation.coordinate
         Location.shared.state = .loaded
