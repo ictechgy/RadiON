@@ -16,16 +16,29 @@ import Foundation
 class NetworkHandler {
     private static let urlString: String = "https://iernet.kins.re.kr/all_site.asp"
     
-    let urlSession: URLSession = URLSession.shared  //Singletone, 가장 기본적이며 제한적 사항만을 가지고 있는 객체
+    let lastFetchTime: Date?    //마지막으로 fetch한 시간을 가지고 있는다.
     
-    class func fetchData(handler: (data: Data?, urlResponse: URLResponse?, error: Error?) -> Void) {    //완료 핸들러는 외부에서 클로저로 받는다.
+    private static let urlSession: URLSession = URLSession.shared  //Singletone, 가장 기본적이며 제한적 사항만을 가지고 있는 객체
+    
+    class func fetchData(completionHandler: @escaping (_ data: Data?,_ urlResponse: URLResponse?,_ error: Error?) -> Void) {    //완료 핸들러는 외부에서 클로저로 받는다. 클로저는 이 함수 내에서 실행하는게 아니라 함수가 끝난 뒤 콜백으로 실행될 것이므로 @escaping
         
         guard let url: URL = URL(string: urlString) else{
             //some error message
             return
         }
+        
+        var urlRequest: URLRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
     
-        let urlSessionTask: URLSessionTask = urlSession.dataTask(with: url, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
+        let urlSessionTask: URLSessionTask = urlSession.dataTask(with: urlRequest, completionHandler: completionHandler)
+        
+        urlSessionTask.resume()
+        
     }
     
+    enum resultCode {
+        case sessionStarted
+        case sessionStopped
+        
+    }
 }
