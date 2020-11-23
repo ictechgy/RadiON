@@ -14,31 +14,51 @@ import Foundation
 //오래된 데이터를 가지고 있는 경우 화면이 보일 때 time값과 현재 시각 비교 후 자동갱신 해주고 그 외에는 수동갱신으로 설정
 
 class NetworkHandler {
-    private static let urlString: String = "https://iernet.kins.re.kr/all_site.asp"
+    //singletone
+    static let shared: NetworkHandler = NetworkHandler()
+    private init(){}
     
-    let lastFetchTime: Date?    //마지막으로 fetch한 시간을 가지고 있는다.
+    private let urlString: String = "https://iernet.kins.re.kr/all_site.asp"
+    private let urlSession: URLSession = URLSession.shared  //가장 기본적이며 제한적 사항만을 가지고 있는 객체
+
+    var lastFetchTime: Date?    //마지막으로 fetch한 시간을 가지고 있는다.
     
-    private static let urlSession: URLSession = URLSession.shared  //Singletone, 가장 기본적이며 제한적 사항만을 가지고 있는 객체
-    
-    class func fetchData(completionHandler: @escaping (_ data: Data?,_ urlResponse: URLResponse?,_ error: Error?) -> Void) {    //완료 핸들러는 외부에서 클로저로 받는다. 클로저는 이 함수 내에서 실행하는게 아니라 함수가 끝난 뒤 콜백으로 실행될 것이므로 @escaping
+    func fetchData() -> resultCode {
+        
+        if let lastFetchTime = lastFetchTime, lastFetchTime >= Date(timeIntervalSinceNow: -300) {
+            return .notEnoughTimeHasPassed
+        }
         
         guard let url: URL = URL(string: urlString) else{
             //some error message
-            return
+            return .errorOccurred("invalid URL")
         }
         
         var urlRequest: URLRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
     
-        let urlSessionTask: URLSessionTask = urlSession.dataTask(with: urlRequest, completionHandler: completionHandler)
+        let urlSessionTask: URLSessionTask = urlSession.dataTask(with: urlRequest){ data, response, error in
+            //async
+            if error != nil {
+                return
+            }
+            
+            if let data = data {
+                
+            }
+            
+        }
         
         urlSessionTask.resume()
+        lastFetchTime = Date()
         
+        return .fetchStarted
     }
     
     enum resultCode {
-        case sessionStarted
-        case sessionStopped
-        
+        case fetchStarted
+        case fetchStopped
+        case notEnoughTimeHasPassed
+        case errorOccurred(String)
     }
 }
