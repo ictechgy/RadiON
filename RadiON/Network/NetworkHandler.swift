@@ -43,10 +43,35 @@ class NetworkHandler {
                 return
             }
             
-            if let data = data {
-                
+            guard let data = data, let csvData = String(data: data, encoding: .utf8) else{
+                return
             }
             
+            var stations: [Station] = []
+            
+            let rows = csvData.components(separatedBy: "\r\n")
+            for (index, row) in rows.enumerated() {
+                if index == 0 { continue }  //0번 인덱스는 각 컬럼 제목이므로 스킵
+                let columns = row.components(separatedBy: ",")    //각 칼럼 구분
+                
+                var networkAndArea = columns[0]
+                let endOfNetworkIndex = networkAndArea.firstIndex(of: "]")
+                
+                var network: String = ""
+                var administrativeArea: String = ""
+                if let endOfNetworkIndex = endOfNetworkIndex {
+                    network = String(networkAndArea[...endOfNetworkIndex])
+                    networkAndArea.removeSubrange(...endOfNetworkIndex)
+                    administrativeArea = String(networkAndArea)
+                }
+                
+                let locationName = columns[1]
+                let doseEquivalent = columns[2]
+                let exposure = columns[3]
+                let status = columns[4]
+                
+                stations.append(Station(networkType: Station.networkType(rawValue: network), administrativeArea: administrativeArea, locationName: locationName))
+            }
         }
         
         urlSessionTask.resume()
