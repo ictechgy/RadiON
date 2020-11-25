@@ -10,6 +10,7 @@
 		9D7DF889EE2D29581BE0A1AF /* Pods_RadiON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD6DEE1CD6554A3267F9E2F5 /* Pods_RadiON.framework */; };
 		C42469B0255BD241009592DF /* HalfCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42469AF255BD241009592DF /* HalfCircularProgressView.swift */; };
 		C42469B5255C40AC009592DF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42469B4255C40AC009592DF /* MainTabBarController.swift */; };
+		C45B0F3B256E9618001AEE5A /* AssetsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B0F3A256E9618001AEE5A /* AssetsLoader.swift */; };
 		C4623811255EEE1F00023F35 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4623810255EEE1F00023F35 /* Location.swift */; };
 		C47FB991255B0B8B00BE4F2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FB990255B0B8B00BE4F2E /* AppDelegate.swift */; };
 		C47FB993255B0B8B00BE4F2E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FB992255B0B8B00BE4F2E /* SceneDelegate.swift */; };
@@ -28,6 +29,7 @@
 		C1EE314E18F7C44B6DF4DDD6 /* Pods-RadiON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiON.release.xcconfig"; path = "Target Support Files/Pods-RadiON/Pods-RadiON.release.xcconfig"; sourceTree = "<group>"; };
 		C42469AF255BD241009592DF /* HalfCircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCircularProgressView.swift; sourceTree = "<group>"; };
 		C42469B4255C40AC009592DF /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		C45B0F3A256E9618001AEE5A /* AssetsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsLoader.swift; sourceTree = "<group>"; };
 		C4623810255EEE1F00023F35 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		C47FB98D255B0B8B00BE4F2E /* RadiON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47FB990255B0B8B00BE4F2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				C4623810255EEE1F00023F35 /* Location.swift */,
 				C497FA57256BB18F00E2DEFA /* Station.swift */,
+				C45B0F3A256E9618001AEE5A /* AssetsLoader.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				C47FB995255B0B8B00BE4F2E /* ViewController.swift in Sources */,
 				C497FA58256BB18F00E2DEFA /* Station.swift in Sources */,
 				C42469B0255BD241009592DF /* HalfCircularProgressView.swift in Sources */,
+				C45B0F3B256E9618001AEE5A /* AssetsLoader.swift in Sources */,
 				C42469B5255C40AC009592DF /* MainTabBarController.swift in Sources */,
 				C47FB991255B0B8B00BE4F2E /* AppDelegate.swift in Sources */,
 				C4623811255EEE1F00023F35 /* Location.swift in Sources */,

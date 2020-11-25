@@ -23,7 +23,7 @@ class NetworkHandler {
 
     var lastFetchTime: Date?    //마지막으로 fetch한 시간을 가지고 있는다.
     
-    func fetchData() -> resultCode {
+    func fetchCSVData() -> resultCode {
         
         if let lastFetchTime = lastFetchTime, lastFetchTime >= Date(timeIntervalSinceNow: -300) {
             return .notEnoughTimeHasPassed
@@ -70,7 +70,9 @@ class NetworkHandler {
                 let exposure = columns[3]
                 let status = columns[4]
                 
-                stations.append(Station(networkType: Station.networkType(rawValue: network), administrativeArea: administrativeArea, locationName: locationName))
+                stations.append(
+                    Station(networkDelimitation: Station.networkType(rawValue: network) ?? .unknownNetwork, administrativeArea: administrativeArea, locationName: locationName, locationLatitude: nil, locationLongitude: nil, doseEquivalent: Double(doseEquivalent) ?? 0.0, exposure: Double(exposure) ?? 0.0, status: Station.levelType(rawValue: status) ?? .unknownLevel)
+                )
             }
         }
         

@@ -15,16 +15,10 @@ struct Station {
     var locationLatitude: Double?
     var locationLongitude: Double?
     
-    var doseEquivalent: Double?
-    var exposure: Double?
+    var doseEquivalent: Double
+    var exposure: Double
     
-    var status: levelType?
-    
-    init(networkType: networkType, administrativeArea: String, locationName: String) {
-        self.networkDelimitation = networkType
-        self.administrativeArea = administrativeArea
-        self.locationName = locationName
-    }
+    var status: levelType
     
     enum networkType: String {
         case national = "국가망"
