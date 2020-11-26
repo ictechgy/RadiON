@@ -23,15 +23,14 @@ class NetworkHandler {
 
     var lastFetchTime: Date?    //마지막으로 fetch한 시간을 가지고 있는다.
     
-    func fetchCSVData() -> resultCode {
+    func fetchCSVData(resultHandler: @escaping (Result<[Station], FetchError>)->Void ) {
         
-        if let lastFetchTime = lastFetchTime, lastFetchTime >= Date(timeIntervalSinceNow: -300) {
-            return .notEnoughTimeHasPassed
+        if let lastFetchTime = lastFetchTime, lastFetchTime >= Date(timeIntervalSinceNow: -300) {   //5분 딜레이
+            return resultHandler(.failure(.timeError))
         }
         
         guard let url: URL = URL(string: urlString) else{
-            //some error message
-            return .errorOccurred("invalid URL")
+            return resultHandler(.failure(.urlError))
         }
         
         var urlRequest: URLRequest = URLRequest(url: url)
@@ -39,18 +38,13 @@ class NetworkHandler {
     
         let urlSessionTask: URLSessionTask = urlSession.dataTask(with: urlRequest){ data, response, error in
             //async
-            if error != nil {
-                return
-            }
-            
             guard let data = data, let csvData = String(data: data, encoding: .utf8) else{
-                return
+                return DispatchQueue.main.async { resultHandler(.failure(.dataTaskError(error))) }
             }
             
             var stations: [Station] = []
             
-            let rows = csvData.components(separatedBy: "\r\n")
-            for (index, row) in rows.enumerated() {
+            for (index, row) in csvData.components(separatedBy: "\r\n").enumerated() {
                 if index == 0 { continue }  //0번 인덱스는 각 컬럼 제목이므로 스킵
                 let columns = row.components(separatedBy: ",")    //각 칼럼 구분
                 
@@ -74,18 +68,20 @@ class NetworkHandler {
                     Station(networkDelimitation: Station.networkType(rawValue: network) ?? .unknownNetwork, administrativeArea: administrativeArea, locationName: locationName, locationLatitude: nil, locationLongitude: nil, doseEquivalent: Double(doseEquivalent) ?? 0.0, exposure: Double(exposure) ?? 0.0, status: Station.levelType(rawValue: status) ?? .unknownLevel)
                 )
             }
+            
+            //파싱 완료 후
+            return DispatchQueue.main.async { resultHandler(.success(stations)) }
         }
         
         urlSessionTask.resume()
         lastFetchTime = Date()
         
-        return .fetchStarted
+        return
     }
     
-    enum resultCode {
-        case fetchStarted
-        case fetchStopped
-        case notEnoughTimeHasPassed
-        case errorOccurred(String)
+    enum FetchError: Error {
+        case timeError
+        case urlError
+        case dataTaskError(Error?)
     }
 }
