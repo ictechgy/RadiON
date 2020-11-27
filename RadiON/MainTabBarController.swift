@@ -14,6 +14,8 @@ let ReceivedLocationInfo: String = "ReceivedLocationInfo"
 class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager! //LocationManager객체는 TabBarContainer에서 관리하자 -> 홈화면과 지도화면에서 동시 사용하므로.
+    var localDataFetched: Bool = false
+    var dictionaryAboutPosition: [String: (Double, Double)]?
 
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -29,26 +31,39 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        requestCSVDataFromServer()
+        requestData()
         requestLocationPermission()
     }
     
     //MARK: - Custom Methods
-    func requestCSVDataFromServer() {
-        //서버와 통신해서 csv파일 가져오기.
-        //탭 컨트롤러가 보일 때 갱신. 이후에는 별도의 새로고침 버튼으로 데이터 동기화
-        //viewWillAppear에 갱신 메소드를 두었으므로 dissapear뒤에 appear하는 방식으로 무한 호출이 될 경우
-        //불필요한 트래픽을 주게 되므로 갱신 시점 time값 가지고 있기.(새로고침도 해당 time값으로 갱신 허/불허 설정)
-        //오래된 데이터를 가지고 있는 경우 화면이 보일 때 time값과 현재 시각 비교 후 자동갱신 해주고 그 외에는 수동갱신으로 설정
+    func requestData() {
+        //로컬 데이터와 서버 데이터 fetch 후 병합하는 메소드 호출
         
-        let urlString: String = "https://iernet.kins.re.kr/all_site.asp"
-        guard let url: URL = URL(string: urlString) else{
-            //some error message
-            return
+        let assetLoader = AssetsLoader.shared
+        
+        if localDataFetched == false || dictionaryAboutPosition == nil{  //local data는 초기 한번만 가져오면 됨. 변하지 않는 데이터
+            let localResult = assetLoader.getLocalData()
+            
+            switch localResult {
+            case .success(let dictionary):
+                localDataFetched = true
+                dictionaryAboutPosition = dictionary
+            case .failure(_):
+                print("local data 가져오기 실패")     //임시 처리
+                return
+            }
         }
         
-        let urlSession: URLSession = URLSession.shared
-        let urlSessionTask: URLSessionTask = urlSession.dataTask(with: url, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
+        let networkHandler = NetworkHandler.shared
+        networkHandler.fetchCSVData { result in
+            switch result {
+            case .success(let stations):
+                print(stations)
+            case .failure(_):
+                print("fetch error")    //임시 처리
+            }
+        }
+        
     }
     
     func requestLocationPermission() {

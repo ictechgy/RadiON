@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit.NSDataAsset
 
 class AssetsLoader {
     static let shared = AssetsLoader()
@@ -16,8 +17,11 @@ class AssetsLoader {
         //Asset의 csv load
         
         //network 데이터를 local data와 합쳐서 위경도 설정
-        guard let localURL: URL = URL(string: "national_coordinates.csv"), let localCSVData: Data = try? Data(contentsOf: localURL), let localData = String(data: localCSVData, encoding: .utf8) else {
-            return Result.failure(NSError())
+        let dataAsset: NSDataAsset? = NSDataAsset(name: "national_coordinates")
+        //NSDataAsset으로는 잘 가져와진다. data프로퍼티에도 잘 들어가있다. String으로 변환하는 과정의 문제일까 아니면 파일을 다른 방식으로 가져와야 할까?
+        
+        guard let localCSVData = dataAsset?.data, let localData = String(data: localCSVData, encoding: .utf8) else {
+            return Result.failure(NSError())    //변경 필요
         }
         
         var dictionary: [String: (Double, Double)] = [:] //각 지역 값에 맞춰 위경도를 넣을 것이다. 키 값은 지역이름, 밸류값은 각각 위도와 경도를 의미
