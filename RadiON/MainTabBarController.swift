@@ -11,11 +11,14 @@ import CoreLocation
 let locationAuthStatus: String = "LocationAuthStatus"
 let ReceivedLocationInfo: String = "ReceivedLocationInfo"
 
+let fetchedNationalStationsInfo:String = "FetchedNationalStationsInfo"
+
 class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager! //LocationManager객체는 TabBarContainer에서 관리하자 -> 홈화면과 지도화면에서 동시 사용하므로.
     var localDataFetched: Bool = false
     var dictionaryAboutPosition: [String: (Double, Double)]?
+    var stations: [Station]?
 
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -54,16 +57,24 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
             }
         }
         
+        stations = nil
         let networkHandler = NetworkHandler.shared
-        networkHandler.fetchCSVData { result in
+        //아래의 closure는 main thread에서 실행됩니다.
+        networkHandler.fetchCSVData { [unowned self] result in  //retain cycle을 피하는 구문이 필요한가? 이 컨트롤러에서는 클로져를 참조하고 있는 부분은 없는데..
             switch result {
-            case .success(let stations):
-                print(stations)
-            case .failure(_):
+            case .success(var fetchedStations):
+                guard let dictionaryAboutPosition = self.dictionaryAboutPosition else {
+                    return
+                }
+                self.stations = assetLoader.mergeData(localData: dictionaryAboutPosition, fetchedData: &fetchedStations)
+                //배열의 값을 직접적으로 변경하기 위해 주소를 넘겼으며 함수에서는 inout으로 받음
+            case .failure(let error):
+                print(error)
                 print("fetch error")    //임시 처리
+                return
             }
+            NotificationCenter.default.post(name: Notification.Name(fetchedNationalStationsInfo), object: stations)
         }
-        
     }
     
     func requestLocationPermission() {

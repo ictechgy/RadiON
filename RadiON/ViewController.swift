@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveLocationAuthStatus), name: Notification.Name(rawValue: locationAuthStatus), object: CLAuthorizationStatus.self)
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveLocationInfo), name: Notification.Name(ReceivedLocationInfo), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNationalStationsInfo), name: Notification.Name(fetchedNationalStationsInfo), object: [Station].self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,5 +70,18 @@ class ViewController: UIViewController {
         userAddress.text?.append(Location.shared.userAddress ?? "알 수 없음")
     }
     
+    @objc func didReceiveNationalStationsInfo(noti: Notification){
+        
+        guard let stations: [Station] = noti.object as? [Station] else {
+            return
+        }
+        
+        //사용자 위치하고 가장 가까운 관측소를 찾아야 한다.
+        //어떤 방식으로 찾는게 효율적일까?
+        
+        let userLocation = Location.shared.coordinate
+        
+        
+    }
 }
 

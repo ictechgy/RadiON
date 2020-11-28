@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "national_coordinates_utf8.csv",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

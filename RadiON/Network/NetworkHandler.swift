@@ -14,15 +14,17 @@ import Foundation
 //오래된 데이터를 가지고 있는 경우 화면이 보일 때 time값과 현재 시각 비교 후 자동갱신 해주고 그 외에는 수동갱신으로 설정
 
 class NetworkHandler {
-    //singletone
+    /// singletone
     static let shared: NetworkHandler = NetworkHandler()
     private init(){}
     
     private let urlString: String = "https://iernet.kins.re.kr/all_site.asp"
     private let urlSession: URLSession = URLSession.shared  //가장 기본적이며 제한적 사항만을 가지고 있는 객체
 
-    var lastFetchTime: Date?    //마지막으로 fetch한 시간을 가지고 있는다.
+    /// 마지막으로 fetch한 시간을 가지고 있는다.
+    var lastFetchTime: Date?
     
+    /// 서버에서 CSV 파일을 가져와 파싱까지 하는 메소드. parameter는 완료 시 결과값을 받아 처리할 핸들러
     func fetchCSVData(resultHandler: @escaping (Result<[Station], FetchError>)->Void ) {
         
         if let lastFetchTime = lastFetchTime, lastFetchTime >= Date(timeIntervalSinceNow: -300) {   //5분 딜레이
@@ -38,7 +40,8 @@ class NetworkHandler {
     
         let urlSessionTask: URLSessionTask = urlSession.dataTask(with: urlRequest){ data, response, error in
             //async
-            guard let data = data, let csvData = String(data: data, encoding: .utf8) else{
+            //인코딩 문제 -> 아래와 같이 해결
+            guard let data = data, let csvData = String(data: data, encoding: String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422))) else{
                 return DispatchQueue.main.async { resultHandler(.failure(.dataTaskError(error))) }
             }
             
@@ -47,6 +50,7 @@ class NetworkHandler {
             for (index, row) in csvData.components(separatedBy: "\r\n").enumerated() {
                 if index == 0 { continue }  //0번 인덱스는 각 컬럼 제목이므로 스킵
                 let columns = row.components(separatedBy: ",")    //각 칼럼 구분
+                if columns.count < 5 { continue }   //칼럼 개수 충족 못하는 경우 스킵
                 
                 var networkAndArea = columns[0]
                 let endOfNetworkIndex = networkAndArea.firstIndex(of: "]")
@@ -60,7 +64,8 @@ class NetworkHandler {
                 }
                 
                 let locationName = columns[1]
-                let doseEquivalent = columns[2]
+                let doseEquivalent = columns[2].trimmingCharacters(in: ["=","\""])  //불필요한 특수문자 제거
+                
                 let exposure = columns[3]
                 let status = columns[4]
                 

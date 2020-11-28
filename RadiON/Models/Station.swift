@@ -7,17 +7,25 @@
 
 import Foundation
 
-//관측소
+/// 관측소
 struct Station {
+    /// 어떤 망에 속해있는지 나타내는 프로퍼티
     var networkDelimitation: networkType
+    /// 행정구역
     var administrativeArea: String
+    /// 구체적 지명
     var locationName: String
+    /// 위도
     var locationLatitude: Double?
+    /// 경도
     var locationLongitude: Double?
     
+    /// 등가선량 - 표준단위는 시버트(Sievert, Sv)이며 이 프로퍼티에서는 'μSv/h'단위 사용
     var doseEquivalent: Double
+    /// 조사선량 - 단위: 'μR/h'
     var exposure: Double
     
+    /// 해당 관측소 준위를 나타냄
     var status: levelType
     
     enum networkType: String {
