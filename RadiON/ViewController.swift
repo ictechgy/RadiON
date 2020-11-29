@@ -72,16 +72,31 @@ class ViewController: UIViewController {
     
     @objc func didReceiveNationalStationsInfo(noti: Notification){
         
+        //사용자의 위치를 알 수 없다면(가져오지 못했다면) 가까운 측정소 값을 보여주는 것은 무의미
+        if Location.shared.state != .loaded {
+            return
+        }
+        
         guard let stations: [Station] = noti.object as? [Station] else {
             return
         }
         
         //사용자 위치하고 가장 가까운 관측소를 찾아야 한다.
         //어떤 방식으로 찾는게 효율적일까?
+        //사용자의 위치값하고만 비교하여 최소값을 찾으면 되므로 단순 선형검색을 해도 O(n) 나온다. (관측소의 수도 적음)
         
         let userLocation = Location.shared.coordinate
-        
-        
+        var nearestStation: Station
+        var minDist: Double
+        for station in stations {
+            let dist = calcDist(userLoc: userLocation, stationInfo: station)
+            if minDist.is
+        }
     }
+    
+    func calcDist(userLoc: CLLocationCoordinate2D, stationInfo: Station) -> Double {
+        <#function body#>
+    }
+    
 }
 
