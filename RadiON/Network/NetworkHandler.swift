@@ -58,7 +58,7 @@ class NetworkHandler {
                 var network: String = ""
                 var administrativeArea: String = ""
                 if let endOfNetworkIndex = endOfNetworkIndex {
-                    network = String(networkAndArea[...endOfNetworkIndex])
+                    network = String(networkAndArea[...endOfNetworkIndex]).trimmingCharacters(in: ["[", "]"])
                     networkAndArea.removeSubrange(...endOfNetworkIndex)
                     administrativeArea = String(networkAndArea)
                 }
@@ -88,5 +88,10 @@ class NetworkHandler {
         case timeError
         case urlError
         case dataTaskError(Error?)
+    }
+    
+    /// 값에 따라 준위를 구분한다. 
+    func classifyLevel(<#parameters#>) -> <#return type#> {
+        <#function body#>
     }
 }

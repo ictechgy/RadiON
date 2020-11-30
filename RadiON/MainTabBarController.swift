@@ -34,7 +34,7 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        requestData()
+        //requestData() -> 호출 시점을 변경하였음. 사용자 위치 값 호출 성공에 대한 locationManager(didUpdateLocations:) 쪽으로 변경
         requestLocationPermission()
     }
     
@@ -135,6 +135,8 @@ class MainTabBarController: UITabBarController, CLLocationManagerDelegate {
         }
         Location.shared.coordinate = userLocation.coordinate
         Location.shared.state = .loaded
+        
+        requestData()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
