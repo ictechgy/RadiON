@@ -113,9 +113,13 @@ class ViewController: UIViewController {
             value =  station.doseEquivalent
         }
         
-        levelLabel.text = level
+        
         levelFrom.text = from
-        circularView.setValueAndProgressAnimation(estimated: value)
+        let levelWithColorAndValue: (Station.levelType, UIColor, Double) = Station.classifyLevel(value: value)
+        
+        levelLabel.text = level + " (" + levelWithColorAndValue.0.rawValue + " )"
+        circularView.progressLayerStrokeColor = levelWithColorAndValue.1.cgColor
+        circularView.setValueAndProgressAnimation(estimated: levelWithColorAndValue.2)
     }
     
     func calcDist(userLoc: CLLocationCoordinate2D, stationInfo: Station) -> Double {

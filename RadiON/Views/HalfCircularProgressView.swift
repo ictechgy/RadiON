@@ -53,6 +53,14 @@ class HalfCircularProgressView: UIView {    //UIView를 상속
         layer.addSublayer(progressLayer)
     }
     
+    var progressLayerStrokeColor: CGColor? {
+        set {
+            progressLayer.strokeColor = newValue
+        }
+        get {
+            return progressLayer.strokeColor
+        }
+    }
     
     //측정 된 값에 따라 progressBar가 애니메이션과 함께 fill
     func setValueAndProgressAnimation(estimated value: Double) {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit.UIColor
 
 /// 관측소
 struct Station {
@@ -45,26 +46,40 @@ struct Station {
     }
     
     /// 값에 따라 준위를 구분. 주의가 필요하다. 국가환경방사선자동감시망의 경보설정에 대한 기준은 최근 3년치 평균 값을 이용하고 있으나 해당 3년치 평균 값을 지역별로, 또 자동적으로 구할 수가 없다. 따라서 일반적 자연변동 범위인 0.05~0.30µSv/h를 정상으로 표기하고 0.973µSv/h 미만을 주의, 그 이상은 경고로 한다. 973µSv/h 이상은 비상으로 한다. 이는 사용자 화면에도 보여져야 한다. (앱 최초시작 팝업에서 한번, 메인화면 하단에서 상시)
-    static func classifyLevel(value: Double?) -> levelType {
+    static func classifyLevel(value: Double?) -> (levelType, UIColor, Double) {
         var type: levelType
+        var color: UIColor
+        var levelValue: Double
         switch value {
         case .none:
             type = .underInspection
+            color = .gray
+            levelValue = 0.0
         case .some(let value):
             switch value {
             case 0.05...0.30:
                 type = .normal
+                color = .green
+                levelValue = 0.25
             case 0.30..<0.973:
                 type = .caution
+                color = .yellow
+                levelValue = 0.50
             case 0.973..<973:
                 type = .warning
+                color = .orange
+                levelValue = 0.75
             case 973...:
                 type = .emergency
+                color = .red
+                levelValue = 1.0
             default:
                 type = .unknownLevel
+                color = .black
+                levelValue = 0.0
             }
         }
-        return type
+        return (type, color, levelValue)
     }
     //메소드 위치를 고민했었는데 NetworkHandler에서 Station으로 바꿈. 준위와 관련되어있으며 levelType enum을 쓸 것이므로.
     
