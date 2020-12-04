@@ -36,6 +36,12 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="levelType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lX1-md-bYr">
+                                        <rect key="frame" x="16" y="71.5" width="222" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -43,13 +49,16 @@
                                     <constraint firstItem="EcE-eg-Knd" firstAttribute="leading" secondItem="vb0-Sm-Itz" secondAttribute="leading" id="44D-Af-E0H"/>
                                     <constraint firstItem="vb0-Sm-Itz" firstAttribute="bottom" secondItem="Fgs-zR-3sw" secondAttribute="bottomMargin" id="4UL-l8-t3l"/>
                                     <constraint firstItem="EcE-eg-Knd" firstAttribute="centerY" secondItem="Fgs-zR-3sw" secondAttribute="centerY" id="A3t-3y-ffF"/>
+                                    <constraint firstItem="1aR-y1-bM6" firstAttribute="top" secondItem="lX1-md-bYr" secondAttribute="bottom" constant="56" id="Bw7-81-jRl"/>
                                     <constraint firstItem="vb0-Sm-Itz" firstAttribute="trailing" secondItem="Fgs-zR-3sw" secondAttribute="trailingMargin" id="DPP-0S-kdH"/>
+                                    <constraint firstAttribute="trailing" secondItem="lX1-md-bYr" secondAttribute="trailing" constant="16" id="PdK-IC-v9o"/>
                                     <constraint firstItem="EcE-eg-Knd" firstAttribute="centerX" secondItem="Fgs-zR-3sw" secondAttribute="centerX" id="Rnp-Vr-azm"/>
                                     <constraint firstAttribute="trailing" secondItem="1aR-y1-bM6" secondAttribute="trailing" constant="16" id="THG-xg-5su"/>
                                     <constraint firstItem="EcE-eg-Knd" firstAttribute="leading" secondItem="Fgs-zR-3sw" secondAttribute="leading" constant="16" id="UGo-hN-qx9"/>
                                     <constraint firstItem="1aR-y1-bM6" firstAttribute="leading" secondItem="Fgs-zR-3sw" secondAttribute="leading" constant="16" id="bTu-I5-ETr"/>
                                     <constraint firstItem="1aR-y1-bM6" firstAttribute="top" secondItem="EcE-eg-Knd" secondAttribute="bottom" constant="8" symbolic="YES" id="esk-Bm-83z"/>
                                     <constraint firstItem="EcE-eg-Knd" firstAttribute="top" secondItem="Fgs-zR-3sw" secondAttribute="top" constant="80" id="gV6-87-Mpb"/>
+                                    <constraint firstItem="lX1-md-bYr" firstAttribute="leading" secondItem="Fgs-zR-3sw" secondAttribute="leading" constant="16" id="o2t-eL-LAh"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -67,6 +76,7 @@
                         <outlet property="circularView" destination="Fgs-zR-3sw" id="MQN-79-O6p"/>
                         <outlet property="levelFrom" destination="1aR-y1-bM6" id="O1u-9J-Eej"/>
                         <outlet property="levelLabel" destination="EcE-eg-Knd" id="hpZ-7E-1OS"/>
+                        <outlet property="levelType" destination="lX1-md-bYr" id="Vdt-pS-zKd"/>
                         <outlet property="userAddress" destination="vb0-Sm-Itz" id="OOv-zw-OzH"/>
                     </connections>
                 </viewController>

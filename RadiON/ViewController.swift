@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var userAddress: UILabel!
     @IBOutlet weak var levelFrom: UILabel!
+    @IBOutlet weak var levelType: UILabel!
     
     let locError: String = "?"
     let locLoading: String = "loading"
@@ -117,7 +118,9 @@ class ViewController: UIViewController {
         levelFrom.text = from
         let levelWithColorAndValue: (Station.levelType, UIColor, Double) = Station.classifyLevel(value: value)
         
-        levelLabel.text = level + " (" + levelWithColorAndValue.0.rawValue + " )"
+        levelLabel.text = level
+        levelType.text = " (" + levelWithColorAndValue.0.rawValue + " )"
+        levelType.textColor = levelWithColorAndValue.1
         circularView.progressLayerStrokeColor = levelWithColorAndValue.1.cgColor
         circularView.setValueAndProgressAnimation(estimated: levelWithColorAndValue.2)
     }

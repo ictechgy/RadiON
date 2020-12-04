@@ -56,8 +56,10 @@ class NMapViewController: UIViewController, NMFAuthManagerDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveLocationAuthStatus), name: Notification.Name(rawValue: locationAuthStatus), object: CLAuthorizationStatus.self)
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveLocationInfo), name: Notification.Name(ReceivedLocationInfo), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNationalStationsInfo), name: Notification.Name(fetchedNationalStationsInfo), object: nil)
         
         mainTabBarController?.requestLocationPermission()
+        mainTabBarController?.requestData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,6 +83,32 @@ class NMapViewController: UIViewController, NMFAuthManagerDelegate {
             locationOverlay.location = NMGLatLng(from: Location.shared.coordinate)
             locationOverlay.hidden = false  //설정 후 보여주기. (현재 내 위치 버튼 안눌러도 기본적으로 보이도록)
         }
+    }
+    
+    @objc func didReceiveNationalStationsInfo(noti: Notification){
+        
+        guard let stations: [Station] = noti.object as? [Station] else {
+            return
+        }
+        
+        //가져온 측정소 정보 지도에 보여주기
+        //마커를 만드는 작업은 백그라운드에서 수행하고 보여주는 부분만 메인쓰레드에서 수행
+        DispatchQueue.global(qos: .default).async {
+            var markers: [NMFMarker] = [] // = [NMFMarker](repeating: NMFMarker(), count: stations.count)
+            for station in stations {
+                let marker = NMFMarker(position: NMGLatLng(lat: station.locationLatitude!, lng: station.locationLongitude!))
+                //위경도 값은 nil일 수 없음. AssetsLoader에서 merge할 때 값이 없는 경우 0.0으로 넣도록 만듬.
+                markers.append(marker)
+            }
+            
+            DispatchQueue.main.async { [weak self] in   //비동기적으로 시행되다보니 메인쓰레드에서 마커를 추가하려고 할 때 사용자가 화면을 바꿨을 수 있음. 따라서 self가 없을 수 있다.
+                for marker in markers {
+                    marker.mapView = self?.mapView
+                }
+            }
+        }
+        
+        
     }
     
     func authorized(_ state: NMFAuthState, error: Error?) {

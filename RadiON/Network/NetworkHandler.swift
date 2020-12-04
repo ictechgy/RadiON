@@ -27,9 +27,10 @@ class NetworkHandler {
     /// 서버에서 CSV 파일을 가져와 파싱까지 하는 메소드. parameter는 완료 시 결과값을 받아 처리할 핸들러
     func fetchCSVData(resultHandler: @escaping (Result<[Station], FetchError>)->Void ) {
         
-        if let lastFetchTime = lastFetchTime, lastFetchTime >= Date(timeIntervalSinceNow: -300) {   //5분 딜레이
-            return resultHandler(.failure(.timeError))
-        }
+        //메인화면 띄웠다가 바로 지도화면 넘어가는 경우 fetch가 안되서 잠시 막아둠
+//        if let lastFetchTime = lastFetchTime, lastFetchTime >= Date(timeIntervalSinceNow: -300) {   //5분 딜레이
+//            return resultHandler(.failure(.timeError))
+//        }
         
         guard let url: URL = URL(string: urlString) else{
             return resultHandler(.failure(.urlError))
