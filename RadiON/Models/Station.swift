@@ -41,7 +41,7 @@ struct Station {
         case caution = "주의"
         case warning = "경고"
         case emergency = "비상"
-        case underInspection = "점검"
+        case underInspection = "점검 중"     //점검 중인 경우에 이름은 '점검 중'으로, 등가선량과 조사선량은 fetch시 csv파일에 - 기호로 들어옴
         case unknownLevel = "알 수 없음"
     }
     

@@ -98,6 +98,12 @@ class NMapViewController: UIViewController, NMFAuthManagerDelegate {
             for station in stations {
                 let marker = NMFMarker(position: NMGLatLng(lat: station.locationLatitude!, lng: station.locationLongitude!))
                 //위경도 값은 nil일 수 없음. AssetsLoader에서 merge할 때 값이 없는 경우 0.0으로 넣도록 만듬.
+                
+                //marker 세팅
+                marker.iconTintColor = Station.classifyLevel(value: station.doseEquivalent).1
+                marker.height = 25.0
+                marker.width = 20.0
+                marker.isHideCollidedSymbols = true
                 markers.append(marker)
             }
             

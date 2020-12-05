@@ -65,9 +65,17 @@ class NetworkHandler {
                 }
                 
                 let locationName = columns[1]
-                let doseEquivalent = columns[2].trimmingCharacters(in: ["=","\""])  //불필요한 특수문자 제거
+                var doseEquivalent = columns[2].trimmingCharacters(in: ["=","\""])  //불필요한 특수문자 제거
+                if doseEquivalent == "-" {
+                    doseEquivalent = "-1"
+                }
                 
-                let exposure = columns[3]
+                var exposure = columns[3]
+                if exposure == "-" {
+                    exposure = "-1"
+                }
+                //점검중인 경우 -1 값으로 지정
+                
                 let status = columns[4]
                 
                 stations.append(
