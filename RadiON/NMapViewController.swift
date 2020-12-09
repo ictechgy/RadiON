@@ -100,7 +100,23 @@ class NMapViewController: UIViewController, NMFAuthManagerDelegate {
                 //위경도 값은 nil일 수 없음. AssetsLoader에서 merge할 때 값이 없는 경우 0.0으로 넣도록 만듬.
                 
                 //marker 세팅
-                marker.iconTintColor = Station.classifyLevel(value: station.doseEquivalent).1
+                var color: UIColor
+                
+                switch station.status {
+                case .normal:
+                    color = .green
+                case .caution:
+                    color = .yellow
+                case .warning:
+                    color = .orange
+                case .emergency:
+                    color = .red
+                case .underInspection:
+                    color = .gray
+                case .unknownLevel:
+                    color = .black
+                }
+                marker.iconTintColor = color
                 marker.height = 25.0
                 marker.width = 20.0
                 marker.isHideCollidedSymbols = true

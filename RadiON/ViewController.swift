@@ -12,10 +12,10 @@ import CoreData
 class ViewController: UIViewController {
     
     @IBOutlet weak var circularView: HalfCircularProgressView!
-    @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var levelLabel: UILabel!     //측정소에서 측정한 값
     @IBOutlet weak var userAddress: UILabel!
-    @IBOutlet weak var levelFrom: UILabel!
-    @IBOutlet weak var levelType: UILabel!
+    @IBOutlet weak var levelFrom: UILabel!      //측정소 위치
+    @IBOutlet weak var levelType: UILabel!      //정상인지 점검인지..
     
     let locError: String = "?"
     let locLoading: String = "loading"
@@ -102,28 +102,62 @@ class ViewController: UIViewController {
         //Custom 뷰와 levelLabel에 보여줄 차례 + 어느 관측소 값인지 추가정보 표기
         var level: String
         var from: String
-        var value: Double
         switch nearestStation {
         case .none:
             level = "N/A"
             from = "N/A"
-            value = 0.0
         case .some(let station):
             level = String(station.doseEquivalent) + " µSv/h"
             from = "측정소 - [" + station.networkDelimitation.rawValue + "] " + station.locationName
-            value =  station.doseEquivalent
         }
         
         
         levelFrom.text = from
-        let levelWithColorAndValue: (Station.levelType, UIColor, Double) = Station.classifyLevel(value: value)
-        
         levelLabel.text = level
-        levelType.text = " (" + levelWithColorAndValue.0.rawValue + " )"
-        levelType.textColor = levelWithColorAndValue.1
-        circularView.progressLayerStrokeColor = levelWithColorAndValue.1.cgColor
-        circularView.setValueAndProgressAnimation(estimated: levelWithColorAndValue.2)
+            
+        var typeText: String = String(nearestStation?.status.rawValue ?? "")
+        var typeColor: UIColor
+        var progressValue: Double
+        
+        switch nearestStation?.status {
+        case .none:
+            typeText = ""
+            typeColor = UIColor.init(displayP3Red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)  //transparent
+            progressValue = 0.0
+        case .normal:
+            typeColor = UIColor.green
+            progressValue = 0.25
+        case .caution:
+            typeColor = UIColor.yellow
+            progressValue = 0.50
+        case .warning:
+            typeColor = UIColor.orange
+            progressValue = 0.75
+        case .emergency:
+            typeColor = UIColor.red
+            progressValue = 1.00
+        case .underInspection:
+            typeColor = UIColor.gray
+            progressValue = 0.0
+        case .unknownLevel:
+            typeColor = UIColor.black
+            progressValue = 0.0
+        }
+        
+        levelType.text = typeText
+        levelType.textColor = typeColor
+        circularView.progressLayerStrokeColor = typeColor.cgColor
+        circularView.setValueAndProgressAnimation(estimated: progressValue)
     }
+    
+    // 값에 따라 준위를 구분. 주의가 필요하다. 국가환경방사선자동감시망의 경보설정에 대한 기준은 최근 3년치 평균 값을 이용하고 있으나 해당 3년치 평균 값을 지역별로, 또 자동적으로 구할 수가 없다. 따라서 일반적 자연변동 범위인 0.05~0.30µSv/h를 정상으로 표기하고 0.973µSv/h 미만을 주의, 그 이상은 경고로 한다. 973µSv/h 이상은 비상으로 한다. 이는 사용자 화면에도 보여져야 한다. (앱 최초시작 팝업에서 한번, 메인화면 하단에서 상시)
+    //메소드 위치를 고민했었는데 NetworkHandler에서 Station으로 바꿈. 준위와 관련되어있으며 levelType enum을 쓸 것이므로. -> 삭제
+    
+    //이부분 경고와 함께 작성해야하며..(나중에는 앱 시작화면 및 메인화면 하단에서 알려주는게 좋을 듯)
+    //이전 커밋에서 관측소 값들을 사용자의 위치가 얻어진 이후에 받아지도록 했는데 사실 다시 바꿔야함.
+    //지도화면에서는 위치권한이 있든 없든 관측소 데이터는 받아야 하기 때문
+    //따라서 Notification을 다르게 설정해야 할 필요성이 있음. 아니면 어떤 Delegate를 만들어 구현하던가.. (이 때에는 Retain Cycle 주의)
+    
     
     func calcDist(userLoc: CLLocationCoordinate2D, stationInfo: Station) -> Double {
         //단순히 위경도 차이 값을 구하는 것이긴 한데 편서풍을 고려해야 할까? 남서쪽 관측소에 가중치를 둔다던지..
