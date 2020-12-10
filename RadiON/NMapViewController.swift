@@ -112,9 +112,9 @@ class NMapViewController: UIViewController, NMFAuthManagerDelegate {
                 case .emergency:
                     color = .red
                 case .underInspection:
-                    color = .gray
+                    color = .blue
                 case .unknownLevel:
-                    color = .black
+                    color = .gray
                 }
                 marker.iconTintColor = color
                 marker.height = 25.0

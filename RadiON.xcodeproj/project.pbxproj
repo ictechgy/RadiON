@@ -11,6 +11,8 @@
 		C42469B0255BD241009592DF /* HalfCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42469AF255BD241009592DF /* HalfCircularProgressView.swift */; };
 		C42469B5255C40AC009592DF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42469B4255C40AC009592DF /* MainTabBarController.swift */; };
 		C45B0F3B256E9618001AEE5A /* AssetsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B0F3A256E9618001AEE5A /* AssetsLoader.swift */; };
+		C45B0F4525825ED3001AEE5A /* UINoticeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B0F4325825ED3001AEE5A /* UINoticeViewCell.swift */; };
+		C45B0F4625825ED3001AEE5A /* UINoticeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C45B0F4425825ED3001AEE5A /* UINoticeViewCell.xib */; };
 		C4623811255EEE1F00023F35 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4623810255EEE1F00023F35 /* Location.swift */; };
 		C47FB991255B0B8B00BE4F2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FB990255B0B8B00BE4F2E /* AppDelegate.swift */; };
 		C47FB993255B0B8B00BE4F2E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47FB992255B0B8B00BE4F2E /* SceneDelegate.swift */; };
@@ -30,6 +32,8 @@
 		C42469AF255BD241009592DF /* HalfCircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfCircularProgressView.swift; sourceTree = "<group>"; };
 		C42469B4255C40AC009592DF /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C45B0F3A256E9618001AEE5A /* AssetsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsLoader.swift; sourceTree = "<group>"; };
+		C45B0F4325825ED3001AEE5A /* UINoticeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINoticeViewCell.swift; sourceTree = "<group>"; };
+		C45B0F4425825ED3001AEE5A /* UINoticeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UINoticeViewCell.xib; sourceTree = "<group>"; };
 		C4623810255EEE1F00023F35 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		C47FB98D255B0B8B00BE4F2E /* RadiON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47FB990255B0B8B00BE4F2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				C42469AF255BD241009592DF /* HalfCircularProgressView.swift */,
+				C45B0F4325825ED3001AEE5A /* UINoticeViewCell.swift */,
+				C45B0F4425825ED3001AEE5A /* UINoticeViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -195,6 +201,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C45B0F4625825ED3001AEE5A /* UINoticeViewCell.xib in Resources */,
 				C47FB99D255B0B8B00BE4F2E /* LaunchScreen.storyboard in Resources */,
 				C47FB99A255B0B8B00BE4F2E /* Assets.xcassets in Resources */,
 				C47FB998255B0B8B00BE4F2E /* Main.storyboard in Resources */,
@@ -256,6 +263,7 @@
 				C45B0F3B256E9618001AEE5A /* AssetsLoader.swift in Sources */,
 				C42469B5255C40AC009592DF /* MainTabBarController.swift in Sources */,
 				C47FB991255B0B8B00BE4F2E /* AppDelegate.swift in Sources */,
+				C45B0F4525825ED3001AEE5A /* UINoticeViewCell.swift in Sources */,
 				C4623811255EEE1F00023F35 /* Location.swift in Sources */,
 				C47FB993255B0B8B00BE4F2E /* SceneDelegate.swift in Sources */,
 				C497FA4C2562CCDC00E2DEFA /* NMapViewController.swift in Sources */,

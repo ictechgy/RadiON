@@ -9,13 +9,15 @@ import UIKit
 import CoreData
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var circularView: HalfCircularProgressView!
     @IBOutlet weak var levelLabel: UILabel!     //측정소에서 측정한 값
     @IBOutlet weak var userAddress: UILabel!
     @IBOutlet weak var levelFrom: UILabel!      //측정소 위치
     @IBOutlet weak var levelType: UILabel!      //정상인지 점검인지..
+    
+    @IBOutlet weak var noticeTableView: UITableView!
     
     let locError: String = "?"
     let locLoading: String = "loading"
@@ -25,6 +27,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        noticeTableView.delegate = self
+        noticeTableView.dataSource = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -137,10 +142,10 @@ class ViewController: UIViewController {
             typeColor = UIColor.red
             progressValue = 1.00
         case .underInspection:
-            typeColor = UIColor.gray
+            typeColor = UIColor.blue
             progressValue = 0.0
         case .unknownLevel:
-            typeColor = UIColor.black
+            typeColor = UIColor.gray
             progressValue = 0.0
         }
         
@@ -166,6 +171,14 @@ class ViewController: UIViewController {
         
         return pow(userLoc.latitude - stationInfo.locationLatitude!, 2) + pow(userLoc.longitude - stationInfo.locationLongitude!, 2)
         //sqrt()를 씌우지 않은 이유는 어차피 큰 의미가 없기 때문. 제곱 값으로 비교하나 제곱근으로 비교하나..
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
     }
     
 }

@@ -61,12 +61,30 @@
                                     <constraint firstItem="lX1-md-bYr" firstAttribute="leading" secondItem="Fgs-zR-3sw" secondAttribute="leading" constant="16" id="o2t-eL-LAh"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GnN-l3-VdE">
+                                <rect key="frame" x="16" y="429" width="382" height="384"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noticeCell" id="G9B-Ea-POT">
+                                        <rect key="frame" x="0.0" y="28" width="382" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G9B-Ea-POT" id="2Uy-hO-vCq" customClass="UINoticeViewCell" customModule="RadiON" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Fgs-zR-3sw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="A2a-OZ-06T"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GnN-l3-VdE" secondAttribute="trailing" constant="16" id="DoI-HW-fVO"/>
+                            <constraint firstItem="GnN-l3-VdE" firstAttribute="top" secondItem="Fgs-zR-3sw" secondAttribute="bottom" constant="16" id="VuP-p7-Kma"/>
+                            <constraint firstItem="GnN-l3-VdE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XBu-9i-fhm"/>
                             <constraint firstItem="Fgs-zR-3sw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YjD-BH-fEO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GnN-l3-VdE" secondAttribute="bottom" id="ZaD-Yn-rnH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Fgs-zR-3sw" secondAttribute="bottom" constant="400" id="jR8-z1-ttZ"/>
                             <constraint firstItem="Fgs-zR-3sw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="zc3-8o-mBA"/>
                         </constraints>
@@ -77,6 +95,7 @@
                         <outlet property="levelFrom" destination="1aR-y1-bM6" id="O1u-9J-Eej"/>
                         <outlet property="levelLabel" destination="EcE-eg-Knd" id="hpZ-7E-1OS"/>
                         <outlet property="levelType" destination="lX1-md-bYr" id="Vdt-pS-zKd"/>
+                        <outlet property="noticeTableView" destination="GnN-l3-VdE" id="yFg-ow-wst"/>
                         <outlet property="userAddress" destination="vb0-Sm-Itz" id="OOv-zw-OzH"/>
                     </connections>
                 </viewController>
